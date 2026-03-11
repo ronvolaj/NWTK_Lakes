@@ -1,43 +1,164 @@
-# sv
+# Albania Lakes REST API
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Project Description
 
-## Creating a project
+This project is a REST API for lakes in Albania built with SvelteKit.
+The API allows users to retrieve information about different lakes such as their name, location, type, surface area and maximum depth.
 
-If you're seeing this, you've probably already done this step. Congrats!
+The main goal of this project is to demonstrate:
+	•	REST API design
+	•	correct HTTP methods and status codes
+	•	Basic Authentication for protected endpoints
+	•	clean Git history with meaningful commits
+	•	API testing and documentation using Postman
 
-```sh
-# create a new project
-npx sv create my-app
-```
+⸻
 
-To recreate this project with the same configuration:
+## Data Model
 
-```sh
-# recreate this project
-npx sv@0.12.5 create --template minimal --no-types --add prettier eslint --install npm .
-```
+Each lake contains the following attributes:
 
-## Developing
+Field	Description
+id	unique identifier
+name	name of the lake
+location	region where the lake is located
+type	type of lake (natural, reservoir, etc.)
+area_km2	surface area in square kilometers
+max_depth_m	maximum depth of the lake in meters
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Example:
 
-```sh
-npm run dev
+{
+  "id": 1,
+  "name": "Lake Shkodra",
+  "location": "Shkoder",
+  "type": "natural",
+  "area_km2": 370,
+  "max_depth_m": 44
+}
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
 
-## Building
+⸻
 
-To create a production version of your app:
+## API Endpoints
 
-```sh
-npm run build
-```
+## Public Endpoints
 
-You can preview the production build with `npm run preview`.
+## Get all lakes
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-# NWTK_Lakes
+GET /api/lakes
+
+Response:
+
+200 OK
+
+Returns a list of all lakes.
+
+⸻
+
+## Get one lake
+
+GET /api/lakes/:id
+
+Example:
+
+GET /api/lakes/1
+
+Responses:
+
+200 OK – lake found
+404 Not Found – lake does not exist
+
+⸻
+
+## Protected Endpoints (Basic Auth required)
+
+## Create a new lake
+
+POST /api/lakes
+
+Response:
+
+201 Created
+
+⸻
+
+## Update a lake
+
+PUT /api/lakes/:id
+
+Response:
+
+200 OK – lake updated
+404 Not Found – lake not found
+
+⸻
+
+## Delete a lake
+
+DELETE /api/lakes/:id
+
+Response:
+
+204 No Content – lake deleted
+404 Not Found – lake not found
+
+⸻
+
+## Authentication
+
+POST, PUT and DELETE endpoints require Basic Authentication.
+
+Example credentials:
+
+Username: admin
+Password: secret
+
+If authentication fails the API returns:
+
+401 Unauthorized
+
+⸻
+
+## HTTP Status Codes
+
+## The API uses standard HTTP status codes:
+	•	200 OK
+	•	201 Created
+	•	204 No Content
+	•	401 Unauthorized
+	•	404 Not Found
+	•	400 Bad Request
+
+⸻
+
+## Technologies Used
+	•	SvelteKit
+	•	Node.js
+	•	SQLite
+	•	REST API
+	•	Postman for testing
+	•	DataGrip for database management
+
+⸻
+
+## Testing
+
+All endpoints were tested using Postman.
+The complete Postman collection is included in this repository.
+
+⸻
+
+## Deployment
+
+The API is deployed using Vercel.
+
+Example endpoint:
+
+GET /api/lakes
+
+⸻
+
+## Author
+
+Project created by Ron Volaj.
