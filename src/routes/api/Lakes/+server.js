@@ -1,5 +1,5 @@
 import pool from '$lib/server/database.js';
-import { API_USER, API_PASS } from '$env/static/private';
+import { API_USER, API_PASSWORD } from '$env/static/private';
 
 function checkAuth(request) {
     const auth = request.headers.get('Authorization');
