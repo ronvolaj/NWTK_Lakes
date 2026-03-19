@@ -9,7 +9,7 @@ function checkAuth(request) {
     const decoded = atob(base64);
     const [user, pass] = decoded.split(':');
 
-    return user === API_USER && pass === API_PASS;
+    return user === API_USER && pass === API_PASSWORD;
 }
 
 export async function GET() {
