@@ -2,6 +2,7 @@ import pool from '$lib/server/database';
 
 import { API_USER, API_PASSWORD } from '$env/static/private';
 
+// Function to check Basic Authentication
 function checkAuth(request) {
     const auth = request.headers.get('Authorization');
     if (!auth?.startsWith('Basic ')) return false;
@@ -11,6 +12,7 @@ function checkAuth(request) {
     return user === API_USER && pass === API_PASSWORD
 }
 
+// GET a single lake by ID
 export async function GET({ params }) {
  
     const { id } = params;
@@ -30,6 +32,7 @@ export async function GET({ params }) {
     return Response.json(rows[0], { status: 200 });
 }
 
+// CREATE a new lake
 export async function POST({ request }) {
     if (!checkAuth(request)) {
         return Response.json({ message: 'Unauthorized' }, { status: 401 });
@@ -45,6 +48,8 @@ export async function POST({ request }) {
     return Response.json({ message: 'Lake created', id: result.insertId }, { status: 201 });
 }
 
+
+// UPDATE an existing lake
 export async function PUT({ params, request }) {
 
     if (!checkAuth(request)) {
@@ -77,6 +82,7 @@ export async function PUT({ params, request }) {
     return Response.json({ message: 'Lake updated' }, { status: 200 });
 }
 
+// DELETE a lake
 export async function DELETE({ params, request }) {
 
     if (!checkAuth(request)) {
